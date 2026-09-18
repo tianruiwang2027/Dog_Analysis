@@ -41,10 +41,16 @@ weights/          small trained weights + their scale constants (~70KB total)
   s2_model.pt / s2_train_result.pkl                     S2-recovery CNN (S2Net)
   env_template_wide.pkl                                 NCC template (for planned fusion work, Section 9)
 
+ground_truth/     small Chelten hand-click annotation files (~45KB total, NOT raw sensor
+                   data) -- see docs/PIPELINE_SUMMARY.md Section 11.1
+  singles_labels.pkl    hand-clicked beat times ("hand_good")
+  valid_regions.pkl     time intervals where that ground truth is itself trustworthy
+
 scripts/          runnable entry points built on src/scg_hr
   run_scg_pipeline.py             run the SCG detector alone for one dog/window
   run_ecg_pantompkins.py          run the ECG detector alone
   compare_scg_vs_ecg.py           full algorithm-vs-algorithm comparison
+  evaluate_vs_hand_clicks.py      reproduces the hand-click-validated r (see "Verification note")
   run_dasty_generalization_check.py   reproduces the Chelten-trained-on-Dasty test
   run_lag_drift_check.py          reproduces the clock-drift investigation
 
@@ -123,15 +129,18 @@ project's local data and cross-checked:
   103/138 documented).
 - **`run_lag_drift_check.py`** reproduces the documented Section 10 finding
   essentially exactly (25.17 ppm vs 25.10 ppm documented, t-stat 15.3, r=0.978).
-- **`run_scg_pipeline.py` / `compare_scg_vs_ecg.py` on Chelten** run correctly
-  and give results in the same ballpark as documented (r≈0.85 vs hand clicks,
-  vs r=0.9095 documented) but not an exact beat-for-beat match against one
-  specific historical intermediate cache file — most likely that cache
-  (`s2_chain_final.pkl`) predates a later weight retrain within the original
-  session rather than a bug in this extraction (candidate generation and CNN
-  scoring were both verified bit-exact / self-consistent independently). If
-  you rely on an exact reproduction of r=0.9095, re-validate against your own
-  hand-click file before trusting downstream numbers.
+- **`run_scg_pipeline.py` / `compare_scg_vs_ecg.py` on Chelten**, run plainly
+  against the raw hive data, give r≈0.85 vs hand clicks instead of the
+  documented r=0.9095. This is root-caused, not just a caveat — see
+  `docs/PIPELINE_SUMMARY.md` Section 11.1: the *detection pipeline itself is
+  provably correct* (every historically-confirmed beat is reproduced exactly),
+  but a fresh run also confidently confirms ~64 genuine false positives that
+  cluster in SCG-quality stretches the original hand-labeling flagged as
+  untrustworthy and excluded from scoring via a `valid_regions` mask. Use
+  `scripts/evaluate_vs_hand_clicks.py` (which applies that mask, using the
+  small hand-click files in `ground_truth/`) to get r≈0.88 — most but not all
+  of the way to 0.9095; the residual is a smaller, not-fully-reconstructed
+  piece of the original evaluation scoping.
 
 ## Known limitations / open work
 

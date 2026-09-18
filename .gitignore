@@ -4,10 +4,11 @@
 *.parquet
 
 # large intermediate pickles from re-running sweeps/experiments locally (the small,
-# validated ones this repo DOES track live under weights/ and
-# experiments/coral_reference_results/, both explicitly excepted below)
+# validated ones this repo DOES track live under weights/ and ground_truth/,
+# both explicitly excepted below)
 *.pkl
 !weights/*.pkl
+!ground_truth/*.pkl
 
 # python
 __pycache__/
