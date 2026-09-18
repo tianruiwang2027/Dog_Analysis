@@ -1,0 +1,28 @@
+# shared raw dataset (symlink to ../data, ~3.5GB, not committed)
+/data
+scg-autolabeler/data
+
+# best-pipeline-chelten: raw hive parquet lake + raw annotation dbs (not committed)
+best-pipeline-chelten/hive/
+best-pipeline-chelten/timestamp_data/
+
+# large/derived artifacts common to both pipelines
+*.parquet
+*.pkl
+!best-pipeline-chelten/weights/*.pkl
+!best-pipeline-chelten/ground_truth/*.pkl
+*.pt
+*.log
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# OS / editor cruft
+.DS_Store
+.ipynb_checkpoints/
+*.swp
