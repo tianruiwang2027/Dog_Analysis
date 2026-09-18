@@ -1,0 +1,7 @@
+# pinned to what this pipeline was developed/validated against; a nearby minor
+# version of any of these should work fine too.
+numpy==2.4.4
+scipy==1.17.1
+torch==2.14.0
+polars==1.44.1
+matplotlib==3.10.9
