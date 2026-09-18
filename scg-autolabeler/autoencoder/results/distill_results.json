@@ -1,0 +1,12 @@
+{
+  "n_stage1_candidates_full_window": 4909,
+  "n_auto_labeled_positive": 2075,
+  "scgnet_params": 6481,
+  "scgnet_bytes_fp32": 25924,
+  "held_out_precision": 0.8156424581005587,
+  "held_out_recall": 0.9299363057324841,
+  "held_out_f1": 0.8690476190476192,
+  "held_out_hr_r": -0.6080391370616235,
+  "held_out_hr_mae": 3.258243174123038,
+  "held_out_hr_n": 6
+}
