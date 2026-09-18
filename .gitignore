@@ -1,0 +1,23 @@
+# raw recordings / hive data lake -- not included in this repo (see README "Data").
+# If you point SCG_HIVE_DIR at a local ./hive copy, keep it out of git:
+/hive/
+*.parquet
+
+# large intermediate pickles from re-running sweeps/experiments locally (the small,
+# validated ones this repo DOES track live under weights/ and
+# experiments/coral_reference_results/, both explicitly excepted below)
+*.pkl
+!weights/*.pkl
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# OS / editor cruft
+.DS_Store
+.ipynb_checkpoints/
+*.swp
