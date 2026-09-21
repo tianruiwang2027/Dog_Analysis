@@ -76,3 +76,13 @@ and `unet/results/UNET_RESULTS.md` for what was actually found, including a coup
 real bugs (BatchNorm miscalibration, test-set threshold leakage) hit and fixed along the
 way, and the "Stage-1 ceiling" finding that turned out to matter more than either
 pipeline's own precision/recall numbers.
+
+## Next steps
+
+- Gather more synchronized SCG-ECG dog data to serve as a training dataset for the
+  auto-labeler.
+- Use a bigger dataset to test which model performs best for our auto-labeling purpose —
+  a masked-autoencoder approach versus a pretrained U-Net.
+- Use the auto-labeler to calibrate to each dog's cardiac signal — i.e., setting a
+  personalized threshold and training the cardiac-cycle recognition model on the
+  specific dog.
