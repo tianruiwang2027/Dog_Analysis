@@ -10,3 +10,13 @@ Combined repo for the Neurolux dog SCG/ECG heart-rate work:
 Raw data is not committed here (see `.gitignore`) — `data/` is a local symlink to the
 shared dataset on disk, and `best-pipeline-chelten/timestamp_data/` holds local copies
 of the raw hand-click annotation databases. Neither is pushed to GitHub.
+
+## Next steps
+
+- Gather more synchronized SCG-ECG dog data to serve as a training dataset for the
+  auto-labeler.
+- Use a bigger dataset to test which model performs best for our auto-labeling purpose —
+  a masked-autoencoder approach versus a pretrained U-Net.
+- Use the auto-labeler to calibrate to each dog's cardiac signal — i.e., setting a
+  personalized threshold and training the cardiac-cycle recognition model on the
+  specific dog.
